@@ -29,7 +29,8 @@ AND I made it reduce the wait-until-online service wait time during boot!
 
 
 # GNOME look:
-![Screenshot-gnome](https://github.com/user-attachments/assets/97c89831-d429-4cc9-946c-d3eea6ba6577)
+<img width="1280" height="800" alt="gnome-Windows-10-theme" src="https://github.com/user-attachments/assets/6a5e1b1e-55c3-417c-a2a5-8c3549888a80" />
+
 
 # KDE Plasma look:
 <img width="1280" height="800" alt="KDE-Windows-10-theme" src="https://github.com/user-attachments/assets/e8f6f825-58b9-45a1-a703-e431dea0db82" />
