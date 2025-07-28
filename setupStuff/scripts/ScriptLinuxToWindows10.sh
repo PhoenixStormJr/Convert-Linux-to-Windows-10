@@ -1025,10 +1025,30 @@ for (i = 0; i < allDesktops.length; i++) {
   d.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
   d.writeConfig("Image", "file:///usr/share/backgrounds/Windows-10-Tux.jpg");
 }'
-  
-  
-  #Next I will install Digital Clock Lite widget.
-  
+
+
+  echo "Changing the name of the recycle bin."
+  # Set the desktop path dynamically (handles localization)
+  DESKTOP_DIR="$HOME/Desktop"
+  # Define file path
+  FILE="$DESKTOP_DIR/Recycle Bin.desktop"
+  # Create the .desktop file with your content
+  cat > "$FILE" <<EOF
+[Desktop Entry]
+EmptyIcon=user-trash
+Icon=user-trash-full
+Name[en_US]=Recycle Bin
+Name=Recycle Bin
+Type=Link
+URL[\$e]=trash:/
+EOF
+  # Make it executable
+  chmod +x "$FILE"
+  echo "Recycle Bin.desktop created at $FILE"
+  cd ~/Desktop
+  rm "trash:⁄.desktop"
+  cd "$(dirname "$0")/../.."
+
   
   #Logout because the script needs to restart everything:
   echo ""
