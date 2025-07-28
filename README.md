@@ -23,9 +23,8 @@ I now made it grow the size of the disk to use all available disk space,
 AND I made it reduce the wait-until-online service wait time during boot!
 
 # XFCE look:
-![VirtualBox_Ubuntu_24_07_2023_18_43_44](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/2bc6294a-0868-442b-a1e4-76ddbdb3b64d)
-![VirtualBox_Ubuntu_24_07_2023_18_45_32](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/19555d5b-c033-4241-92b4-df104c62e387)
-![VirtualBox_Ubuntu_24_07_2023_18_44_32](https://github.com/PhoenixStormJr/xfce-to-windows-10-INCOMPLETE/assets/66498788/fa96f915-e7e1-4145-9764-68ea94de5a0c)
+<img width="1280" height="800" alt="xfce-Windows-10-theme" src="https://github.com/user-attachments/assets/7507dca5-87ab-4dc6-9b0a-31ee2fd56ea3" />
+
 
 
 # GNOME look:
