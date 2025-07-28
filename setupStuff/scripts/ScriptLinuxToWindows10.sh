@@ -569,6 +569,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   
   
   #Installing GNOME extensions:
+  CHANGED=0
   set -e
   UUID="dash-to-panel@jderose9.github.com"
   EXT_DIR="$HOME/.local/share/gnome-shell/extensions/$UUID"
@@ -582,6 +583,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
     echo "📦 Extracting..."
     mkdir -p "$EXT_DIR"
     unzip -o /tmp/dash-to-panel.zip -d "$EXT_DIR"
+    CHANGED=1
   else
     echo "ℹ️ Dash to Panel already installed."
   fi
@@ -598,6 +600,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
     echo "📦 Extracting..."
     mkdir -p "$EXT_DIR"
     unzip -o /tmp/arcmenu.zip -d "$EXT_DIR"
+    CHANGED=1
   else
     echo "ℹ️ Arc Menu already installed."
   fi
@@ -628,9 +631,16 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
       mkdir -p "$EXT_DIR"
       unzip -q ext.zip -d "$EXT_DIR"
       rm ext.zip
+      CHANGED=1
     else
       echo "✅ Extension already installed: date-menu-formatter@marcinjakubowski.github.com"
     fi
+  fi
+  
+  
+  if [ "$CHANGED" -eq 1 ]; then
+    echo "Extensions had to be installed, we must log out."
+    gnome-session-quit --logout
   fi
   
   
