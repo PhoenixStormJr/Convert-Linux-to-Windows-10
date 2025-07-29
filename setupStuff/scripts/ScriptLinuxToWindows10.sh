@@ -1088,5 +1088,6 @@ if [[ "$DE" == *cinnamon* ]]; then
   #Save the panel information:
   dconf dump /org/cinnamon/ > setupStuff/cinnamon-windows-10-stuff/cinnamon-panel-backup.txt
   #Load the panel backup file:
-  
+  dconf load /org/cinnamon/ < setupStuff/cinnamon-windows-10-stuff/cinnamon-panel-backup.txt
+
 fi
