@@ -1118,4 +1118,8 @@ if [[ "$DE" == *cinnamon* ]]; then
   gsettings set org.cinnamon.desktop.wm.preferences theme "Windows-10-Basic"
   gsettings set org.cinnamon.desktop.interface gtk-theme "Windows-10"
   echo "Themes installed and Windows-10-Basic applied."
+  
+  
+  #Log out at the end, because for some reason these desktops have a common denominator of they all hate me and need to be reloaded:
+  cinnamon-session-quit --logout --no-prompt
 fi
