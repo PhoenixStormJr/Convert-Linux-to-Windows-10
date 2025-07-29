@@ -1081,7 +1081,7 @@ if [[ "$DE" == *cinnamon* ]]; then
   
   #Install  Windows 10 like start menu (Cinnamenu):
   unzip setupStuff/cinnamon-windows-10-stuff/Cinnamenu@json.zip -d ~/.local/share/cinnamon/applets/
-  # Step 7: Restart Cinnamon to register the new applet (but do NOT enable it)
+  #Restart Cinnamon to register the new applet (but do NOT enable it)
   cinnamon --replace &
   
   
