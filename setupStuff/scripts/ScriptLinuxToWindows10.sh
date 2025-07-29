@@ -1068,7 +1068,30 @@ EOF
 fi
 #End of KDE-Plasma configuration
 
+
+
+
+
+
 #Now we'll configure Linux Mint cinnamon desktop!
 if [[ "$DE" == *cinnamon* ]]; then
+  # Install dependencies:
   sudo apt install git -y
+  
+  
+  #Install  Windows 10 like start menu (Cinnamenu):
+  # Step 1: Create the applets directory if it doesn't exist
+  mkdir -p ~/.local/share/cinnamon/applets/
+  # Step 2: Download the official CinnaMenu zip
+  wget -O /tmp/CinnaMenu.zip "https://cinnamon-spices.linuxmint.com/files/applets/Cinnamenu@json.zip"
+  # Step 3: Unzip to a temporary directory
+  unzip /tmp/CinnaMenu.zip -d /tmp/CinnaMenu-temp
+  # Step 4: Move and rename the folder properly
+  mv /tmp/CinnaMenu-temp/Cinnamenu@json ~/.local/share/cinnamon/applets/CinnaMenu@json
+  # Step 5: Set permissions so Cinnamon can use the files
+  chmod -R 755 ~/.local/share/cinnamon/applets/CinnaMenu@json
+  # Step 6: Clean up temporary files
+  rm -rf /tmp/CinnaMenu.zip /tmp/CinnaMenu-temp
+  # Step 7: Restart Cinnamon to register the new applet (but do NOT enable it)
+  cinnamon --replace &
 fi
