@@ -1075,13 +1075,22 @@ fi
 #Now we'll configure Linux Mint cinnamon desktop!
 if [[ "$DE" == *cinnamon* ]]; then
   # Install dependencies:
-  sudo apt install git -y
+  if ! command -v git &> /dev/null; then
+    echo "Git not found. Installing..."
+    sudo apt install git -y
+  else
+    echo "Git is already installed."
+  fi
   
   
   #Install  Windows 10 like start menu (Cinnamenu):
-  unzip setupStuff/cinnamon-windows-10-stuff/Cinnamenu@json.zip -d ~/.local/share/cinnamon/applets/
-  #Restart Cinnamon to register the new applet (but do NOT enable it)
-  cinnamon --replace &
+  if [ ! -d "$HOME/.local/share/cinnamon/applets/Cinnamenu@json" ]; then
+    unzip setupStuff/cinnamon-windows-10-stuff/Cinnamenu@json.zip -d "$HOME/.local/share/cinnamon/applets/"
+    #Restart Cinnamon to register the new applet (but do NOT enable it)
+    cinnamon --replace &
+  else
+    echo "Cinnamenu@json already exists. Skipping unzip."
+  fi
   
   
   #Save the panel information:
@@ -1097,8 +1106,7 @@ if [[ "$DE" == *cinnamon* ]]; then
   unzip -o setupStuff/cinnamon-windows-10-stuff/cinnamenu-settings-backup.zip -d ~/.config/cinnamon/spices/
 
 
-  #Download and install Windows 10 theme for cinnamon:
-  # URLs and theme names
+  # Define URLs and theme names
   THEMES=(
     "https://cinnamon-spices.linuxmint.com/files/themes/Windows-10-Basic.zip Windows-10-Basic"
     "https://cinnamon-spices.linuxmint.com/files/themes/Windows-10.zip Windows-10"
@@ -1108,10 +1116,15 @@ if [[ "$DE" == *cinnamon* ]]; then
   for theme_info in "${THEMES[@]}"; do
     URL=$(echo "$theme_info" | awk '{print $1}')
     NAME=$(echo "$theme_info" | awk '{print $2}')
-    echo "Downloading $NAME theme..."
-    wget -q --show-progress -O "/tmp/${NAME}.zip" "$URL"
-    echo "Extracting $NAME theme..."
-    unzip -o "/tmp/${NAME}.zip" -d "$THEMES_DIR"
+    TARGET_DIR="$THEMES_DIR/$NAME"
+    if [ ! -d "$TARGET_DIR" ]; then
+      echo "Downloading $NAME theme..."
+      wget -q --show-progress -O "/tmp/${NAME}.zip" "$URL"
+      echo "Extracting $NAME theme..."
+      unzip -o "/tmp/${NAME}.zip" -d "$THEMES_DIR"
+    else
+      echo "$NAME theme already installed. Skipping..."
+    fi
   done
   echo "Applying Windows-10-Basic theme..."
   gsettings set org.cinnamon.theme name "Windows-10-Basic"
