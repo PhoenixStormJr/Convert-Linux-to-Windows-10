@@ -1070,5 +1070,5 @@ fi
 
 #Now we'll configure Linux Mint cinnamon desktop!
 if [[ "$DE" == *cinnamon* ]]; then
-  echo "I BARELY STARTED DOCTOR"
+  sudo apt install git -y
 fi
