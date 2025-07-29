@@ -1,0 +1,34 @@
+[/]
+enabled-applets=['panel1:left:2:separator@cinnamon.org:1', 'panel1:left:3:grouped-window-list@cinnamon.org:2', 'panel1:right:2:systray@cinnamon.org:3', 'panel1:right:3:xapp-status@cinnamon.org:4', 'panel1:right:4:notifications@cinnamon.org:5', 'panel1:right:5:printers@cinnamon.org:6', 'panel1:right:6:removable-drives@cinnamon.org:7', 'panel1:right:7:keyboard@cinnamon.org:8', 'panel1:right:8:favorites@cinnamon.org:9', 'panel1:right:9:network@cinnamon.org:10', 'panel1:right:10:sound@cinnamon.org:11', 'panel1:right:11:power@cinnamon.org:12', 'panel1:right:12:calendar@cinnamon.org:13', 'panel1:right:13:cornerbar@cinnamon.org:14', 'panel1:left:0:Cinnamenu@json:16']
+next-applet-id=17
+panel-edit-mode=false
+
+[desktop/interface]
+toolkit-accessibility=false
+
+[desktop/peripherals/keyboard]
+numlock-state=true
+
+[desktop/sound]
+event-sounds=false
+
+[gestures]
+swipe-down-2='PUSH_TILE_DOWN::end'
+swipe-down-3='TOGGLE_OVERVIEW::end'
+swipe-down-4='VOLUME_DOWN::end'
+swipe-left-2='PUSH_TILE_LEFT::end'
+swipe-left-3='WORKSPACE_NEXT::end'
+swipe-left-4='WINDOW_WORKSPACE_PREVIOUS::end'
+swipe-right-2='PUSH_TILE_RIGHT::end'
+swipe-right-3='WORKSPACE_PREVIOUS::end'
+swipe-right-4='WINDOW_WORKSPACE_NEXT::end'
+swipe-up-2='PUSH_TILE_UP::end'
+swipe-up-3='TOGGLE_EXPO::end'
+swipe-up-4='VOLUME_UP::end'
+tap-3='MEDIA_PLAY_PAUSE::end'
+
+[settings-daemon/peripherals/keyboard]
+numlock-state='on'
+
+[settings-daemon/plugins/color]
+night-light-last-coordinates=(41.509999999999998, -87.390000000000001)
