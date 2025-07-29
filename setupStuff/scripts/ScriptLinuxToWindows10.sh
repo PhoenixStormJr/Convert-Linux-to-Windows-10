@@ -1094,4 +1094,10 @@ if [[ "$DE" == *cinnamon* ]]; then
   rm -rf /tmp/CinnaMenu.zip /tmp/CinnaMenu-temp
   # Step 7: Restart Cinnamon to register the new applet (but do NOT enable it)
   cinnamon --replace &
+  
+  
+  #Save the panel information:
+  dconf dump /org/cinnamon/ > ~/cinnamon-panel-backup.txt
+  #Load the panel backup file:
+  
 fi
