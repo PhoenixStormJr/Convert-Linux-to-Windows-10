@@ -1090,4 +1090,10 @@ if [[ "$DE" == *cinnamon* ]]; then
   #Load the panel backup file:
   dconf load /org/cinnamon/ < setupStuff/cinnamon-windows-10-stuff/cinnamon-panel-backup.txt
 
+  
+  #Back up the cinnamenu configuration information:
+  #cd ~/.config/cinnamon/spices
+  #zip -r ~/Downloads/Convert-Linux-to-Windows-10-main/setupStuff/cinnamon-windows-10-stuff/cinnamenu-settings-backup.zip Cinnamenu@json
+  #Now restore cinnamenu configuration information:
+  unzip -o setupStuff/cinnamon-windows-10-stuff/cinnamenu-settings-backup.zip -d ~/.config/cinnamon/spices/
 fi
