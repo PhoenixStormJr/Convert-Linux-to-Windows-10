@@ -1095,4 +1095,27 @@ if [[ "$DE" == *cinnamon* ]]; then
   #zip -r ~/Downloads/Convert-Linux-to-Windows-10-main/setupStuff/cinnamon-windows-10-stuff/cinnamenu-settings-backup.zip Cinnamenu@json
   #Now restore cinnamenu configuration information:
   unzip -o setupStuff/cinnamon-windows-10-stuff/cinnamenu-settings-backup.zip -d ~/.config/cinnamon/spices/
+
+
+  #Download and install Windows 10 theme for cinnamon:
+  # URLs and theme names
+  THEMES=(
+    "https://cinnamon-spices.linuxmint.com/files/themes/Windows-10-Basic.zip Windows-10-Basic"
+    "https://cinnamon-spices.linuxmint.com/files/themes/Windows-10.zip Windows-10"
+  )
+  THEMES_DIR="$HOME/.themes"
+  mkdir -p "$THEMES_DIR"
+  for theme_info in "${THEMES[@]}"; do
+    URL=$(echo "$theme_info" | awk '{print $1}')
+    NAME=$(echo "$theme_info" | awk '{print $2}')
+    echo "Downloading $NAME theme..."
+    wget -q --show-progress -O "/tmp/${NAME}.zip" "$URL"
+    echo "Extracting $NAME theme..."
+    unzip -o "/tmp/${NAME}.zip" -d "$THEMES_DIR"
+  done
+  echo "Applying Windows-10-Basic theme..."
+  gsettings set org.cinnamon.theme name "Windows-10-Basic"
+  gsettings set org.cinnamon.desktop.wm.preferences theme "Windows-10-Basic"
+  gsettings set org.cinnamon.desktop.interface gtk-theme "Windows-10"
+  echo "Themes installed and Windows-10-Basic applied."
 fi
