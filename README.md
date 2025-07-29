@@ -1,10 +1,13 @@
 # convert Linux to Windows 10
 
-Note: On GNOME you might have to move the "Install Windows 10 Theme.desktop" link to your ACTUAL desktop to run it!!! But keep the rest of the files in your downloads! Or run this command:
+# Note:
+On GNOME you might have to move the "Install Windows 10 Theme.desktop" link to your ACTUAL desktop to run it!!! But keep the rest of the files in your downloads! Or run this command:
 
 bash ~/Downloads/Convert-Linux-to-Windows-10-main/setupStuff/scripts/ScriptLinuxToWindows10.sh
 
 You will also need to log out and log back in after running it. Then run it AGAIN.
+
+# Desription:
 
 This script will instantly convert ANY Linux desktop to a windows 10 like feel. (Now I'm trying to work on supporting other desktop environments!)
 
