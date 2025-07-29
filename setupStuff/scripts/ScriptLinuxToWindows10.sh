@@ -556,7 +556,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   #Install dependencies:
   sudo add-apt-repository ppa:agornostal/ulauncher -y
   sudo apt update
-  sudo apt install -y nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc wmctrl xdotool
+  sudo apt install -y curl unzip gnome-shell-extensions nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc wmctrl xdotool
   # Set Nemo as default file manager for folders
   xdg-mime default nemo.desktop inode/directory
   
@@ -577,7 +577,6 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   echo "🔍 Checking if Dash to Panel is installed..."
   if [ ! -d "$EXT_DIR" ]; then
     echo "⚠️ Dash to Panel not installed — installing fallback v65..."
-    sudo apt install -y curl unzip gnome-shell-extensions
     echo "🌐 Downloading..."
     curl -sL "$ZIP_URL" -o /tmp/dash-to-panel.zip
     echo "📦 Extracting..."
