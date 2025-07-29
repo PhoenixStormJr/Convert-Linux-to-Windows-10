@@ -1133,6 +1133,12 @@ if [[ "$DE" == *cinnamon* ]]; then
   echo "Themes installed and Windows-10-Basic applied."
   
   
+  #Set universal windows 10 icons:
+  gsettings set org.cinnamon.desktop.interface icon-theme "UniversalWin10Icons"
+  #Set Windows 10 cursor:
+  gsettings set org.cinnamon.desktop.interface cursor-theme "UniversalWin10Icons"
+  
+  
   #Log out at the end, because for some reason these desktops have a common denominator of they all hate me and need to be reloaded:
   cinnamon-session-quit --logout --no-prompt
 fi
