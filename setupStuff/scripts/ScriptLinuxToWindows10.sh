@@ -1058,7 +1058,7 @@ EOF
   cd ~/Desktop
   rm "trash:⁄.desktop"
   cd "$(dirname "$0")/../.."
-
+  
   
   #Logout because the script needs to restart everything:
   echo ""
@@ -1067,3 +1067,8 @@ EOF
   qdbus org.kde.ksmserver /KSMServer logout 0 0 1
 fi
 #End of KDE-Plasma configuration
+
+#Now we'll configure Linux Mint cinnamon desktop!
+if [[ "$DE" == *cinnamon* ]]; then
+  echo "I BARELY STARTED DOCTOR"
+fi
