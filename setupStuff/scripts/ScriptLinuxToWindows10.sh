@@ -1063,7 +1063,7 @@ EOF
   echo ""
   echo "DONE! Logging out to apply the changes!"
   sleep 30
-  qdbus org.kde.ksmserver /KSMServer logout 0 0 1
+  qdbus org.kde.ksmserver /KSMServer logout 0 0 0
 fi
 #End of KDE-Plasma configuration
 
