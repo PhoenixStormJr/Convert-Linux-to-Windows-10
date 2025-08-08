@@ -25,6 +25,8 @@ I now made it grow the size of the disk to use all available disk space,
 
 AND I made it reduce the wait-until-online service wait time during boot!
 
+08/08/2025: I disabled automatic updates since they take so long to install.
+
 # XFCE look:
 <img width="1280" height="800" alt="xfce-Windows-10-theme" src="https://github.com/user-attachments/assets/7507dca5-87ab-4dc6-9b0a-31ee2fd56ea3" />
 
