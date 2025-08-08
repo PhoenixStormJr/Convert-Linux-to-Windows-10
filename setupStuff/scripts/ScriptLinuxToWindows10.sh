@@ -22,6 +22,67 @@ do
 done
 
 
+#Safe disable script for unattended-upgrades on Ubuntu/Debian
+#Only runs if auto updates are still active
+echo "[INFO] Checking unattended-upgrades status..."
+# Function to check if a systemd unit is disabled/masked
+is_disabled_or_masked() {
+  local unit="$1"
+  systemctl is-enabled "$unit" 2>/dev/null | grep -Eq "disabled|masked"
+}
+# Track changes
+changes_made=false
+# Check service
+if is_disabled_or_masked unattended-upgrades.service; then
+  echo "[OK] unattended-upgrades.service is already disabled."
+else
+  echo "[ACTION] Disabling unattended-upgrades.service..."
+  sudo systemctl stop unattended-upgrades.service
+  sudo systemctl disable unattended-upgrades.service
+  sudo systemctl mask unattended-upgrades.service
+  changes_made=true
+fi
+# Check apt-daily timers
+for timer in apt-daily.timer apt-daily-upgrade.timer; do
+    if is_disabled_or_masked "$timer"; then
+      echo "[OK] $timer is already disabled."
+    else
+    echo "[ACTION] Disabling $timer..."
+    sudo systemctl disable --now "$timer"
+    sudo systemctl mask "$timer"
+    changes_made=true
+  fi
+done
+# Check APT config
+AUTO_UPGRADES_CONF="/etc/apt/apt.conf.d/20auto-upgrades"
+if [ -f "$AUTO_UPGRADES_CONF" ] && grep -q 'APT::Periodic::Unattended-Upgrade "0";' "$AUTO_UPGRADES_CONF"; then
+  echo "[OK] APT auto-upgrade config already set to 0."
+else
+  echo "[ACTION] Writing APT auto-upgrade config..."
+  sudo tee "$AUTO_UPGRADES_CONF" >/dev/null <<EOF
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Download-Upgradeable-Packages "0";
+APT::Periodic::Unattended-Upgrade "0";
+EOF
+  changes_made=true
+fi
+# Optional: remove package if still installed
+if dpkg -l | grep -q "^ii\s\+unattended-upgrades"; then
+  echo "[ACTION] Removing unattended-upgrades package..."
+  sudo apt purge -y unattended-upgrades
+  changes_made=true
+else
+  echo "[OK] unattended-upgrades package not installed."
+fi
+if [ "$changes_made" = true ]; then
+  echo "[DONE] Auto-update has been disabled."
+else
+  echo "[INFO] No changes needed — already disabled."
+fi
+
+
+
+
 echo "expanding entire volume of usable space, to use entire disk..."
 # Get the root logical volume device
 LV=$(sudo findmnt -n -o SOURCE /)
