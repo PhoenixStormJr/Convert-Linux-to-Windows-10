@@ -95,6 +95,8 @@ if [ -d "$TARGET_DIR" ]; then
 else
     echo "Installing $THEME_NAME system-wide..."
     sudo tar -xvzf "$ARCHIVE_PATH" -C "$SYSTEM_ICON_DIR"
+    echo "making sure the windows 10 icons can be read but not deleted"
+    sudo chmod 755 -R /usr/share/icons/UniversalWin10Icons
     echo "Installation complete."
 fi
 
@@ -232,13 +234,12 @@ if [[ "$DE" == *xfce* ]]; then
   
   ICON_DIR="/usr/share/icons/UniversalWin10Icons"
   if [ -d "$ICON_DIR" ]; then
-    echo "making sure the windows 10 icons can be read but not deleted"
-    sudo chmod 755 -R /usr/share/icons/UniversalWin10Icons
-    echo "Permissions updated successfully."
     echo "changing icons to UniversalWin10Icons"
     xfconf-query -c xsettings -p /Net/IconThemeName -s UniversalWin10Icons
     echo "changing cursor to UniversalWin10Icons"
     xfconf-query -c xsettings -p /Gtk/CursorThemeName -n -t string -s "UniversalWin10Icons"
+    echo "Updating the icon cache, because XFCE doesn't like me again..."
+    sudo gtk-update-icon-cache /usr/share/icons/UniversalWin10Icons
   else
     echo "Icon folder not found. Skipping chmod."
   fi
