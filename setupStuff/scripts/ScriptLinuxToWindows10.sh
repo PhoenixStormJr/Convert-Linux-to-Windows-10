@@ -616,10 +616,36 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   
   
   #Install dependencies:
-  sudo add-apt-repository ppa:agornostal/ulauncher -y
-  sudo apt update
-  sudo apt install -y curl unzip gnome-shell-extensions nemo gnome-tweaks gnome-software gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine gnome-themes-extra sassc wmctrl xdotool
-  # Set Nemo as default file manager for folders
+  #Check if the PPA is already added
+  if ! grep -h "^deb .*\bppa.launchpad.net/agornostal/ulauncher\b" /etc/apt/sources.list /etc/apt/sources.list.d/* > /dev/null 2>&1; then
+    echo "Adding Ulauncher PPA..."
+    sudo add-apt-repository ppa:agornostal/ulauncher -y
+  else
+    echo "Ulauncher PPA already exists, skipping."
+  fi
+  # List of packages to ensure are installed
+  packages=(
+    curl unzip gnome-shell-extensions nemo gnome-tweaks gnome-software
+    gnome-extensions-app ttf-mscorefonts-installer ulauncher gtk2-engines-murrine
+    gnome-themes-extra sassc wmctrl xdotool
+  )
+  #Check which packages are missing
+  missing=()
+  for pkg in "${packages[@]}"; do
+    if ! dpkg -s "$pkg" &> /dev/null; then
+      missing+=("$pkg")
+    fi
+  done
+  if [ ${#missing[@]} -eq 0 ]; then
+    echo "All packages are already installed. Skipping update and install."
+  else
+    echo "Missing packages: ${missing[*]}"
+    echo "Updating repositories..."
+    sudo apt update
+    echo "Installing missing packages..."
+    sudo apt install -y "${missing[@]}"
+  fi
+  #Set Nemo as default file manager for folders
   xdg-mime default nemo.desktop inode/directory
   
   
