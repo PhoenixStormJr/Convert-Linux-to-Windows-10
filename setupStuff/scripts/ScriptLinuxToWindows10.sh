@@ -749,7 +749,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
 Name=Activities Overview
 Comment=Open GNOME Activities Overview
 Exec=xdotool keydown Super keydown Tab keyup Tab keyup Super
-Icon=system-run
+Icon=xfce4-workspaces
 Terminal=false
 Type=Application
 Categories=Utility;
