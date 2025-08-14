@@ -719,6 +719,10 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   gnome-extensions disable ubuntu-dock@ubuntu.com
   
   
+  #Setting keyboard shortcuts to be like Windows 10:
+  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
+  
+  
   #Changing extension settings to be like Windows 10:
   dconf load /org/gnome/shell/extensions/dash-to-panel/ < setupStuff/dash-to-panel-windows-10.txt
   dconf load /org/gnome/shell/extensions/arcmenu/ < setupStuff/arc-menu-windows-10.txt
