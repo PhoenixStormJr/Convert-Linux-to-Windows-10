@@ -717,11 +717,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
   echo "🚀 Disabling Ubuntu Dock..."
   gnome-extensions disable ubuntu-dock@ubuntu.com
-  
-  
-  #Setting keyboard shortcuts to be like Windows 10:
-  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
-  
+    
   
   #Changing extension settings to be like Windows 10:
   dconf load /org/gnome/shell/extensions/dash-to-panel/ < setupStuff/dash-to-panel-windows-10.txt
@@ -738,33 +734,29 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
 
   
-  #Enabling 4 workspaces only, and workspace switcher:
-  gsettings set org.gnome.mutter dynamic-workspaces false
-  gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
-  mkdir -p ~/.local/bin
-  cat > ~/.local/bin/workspace-next-loop.sh << 'EOF'
-#!/bin/bash
-# Get current workspace (0-indexed)
-current=$(wmctrl -d | awk '$2 == "*" {print $1}')
-# Get total workspaces
-total=$(wmctrl -d | wc -l)
-# Calculate next workspace index with loop
-next=$(( (current + 1) % total ))
-# Switch to next workspace
-xdotool set_desktop $next
-EOF
-  chmod +x ~/.local/bin/workspace-next-loop.sh
-  mkdir -p ~/.local/share/applications
-  cat > ~/.local/share/applications/workspace-next-loop.desktop << 'EOF'
+#Enabling the Windows 10 task view:
+  #Setting keyboard shortcuts to be like Windows 10:
+  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
+  DESKTOP_FILE="$HOME/.local/share/applications/activities-toggle.desktop"
+  #Check if it already exists
+  if [ -f "$DESKTOP_FILE" ]; then
+    echo "Desktop file already exists: $DESKTOP_FILE"
+    exit 0
+  fi
+  #Create the desktop file
+  cat > "$DESKTOP_FILE" << EOF
 [Desktop Entry]
-Name=Next Workspace
-Comment=Switch to the next workspace, looping back to the first
-Exec=bash -c "/home/$USER/.local/bin/workspace-next-loop.sh"
-Icon=xfce4-workspaces
+Name=Activities Overview
+Comment=Open GNOME Activities Overview
+Exec=xdotool keydown Super keydown Tab keyup Tab keyup Super
+Icon=system-run
 Terminal=false
 Type=Application
 Categories=Utility;
 EOF
+  #Make it executable
+  chmod +x "$DESKTOP_FILE"
+  echo "Desktop file created: $DESKTOP_FILE"
   
   
   # System-wide Windows 10 GTK theme installation
