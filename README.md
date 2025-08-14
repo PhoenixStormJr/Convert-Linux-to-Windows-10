@@ -1,4 +1,11 @@
-# convert Linux to Windows 10
+# Convert Linux to Windows 10
+
+# Project Moved:
+Microsoft now owns Github, and they would probably delete this repository, because they hate Linux. I do not trust Github anymore. Therefore I moved the repository here to GitLab:
+
+https://gitlab.com/phoenixstormjr-group/Convert-Linux-to-Windows-10
+
+This repository is DISCONTINUED!!! Go to GitLab from now on.
 
 # Note:
 On GNOME you might have to move the "Install Windows 10 Theme.desktop" link to your ACTUAL desktop to run it!!! But keep the rest of the files in your downloads! Or run this command:
