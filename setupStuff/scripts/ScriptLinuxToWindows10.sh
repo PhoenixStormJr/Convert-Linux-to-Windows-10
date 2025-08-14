@@ -637,9 +637,8 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   #Check if it already exists
   if [ -f "$DESKTOP_FILE" ]; then
     echo "Desktop file already exists: $DESKTOP_FILE"
-    exit 0
-  fi
-  #Create the desktop file
+  else
+    #Create the desktop file
   cat > "$DESKTOP_FILE" << EOF
 [Desktop Entry]
 Name=Activities Overview
@@ -651,8 +650,9 @@ Type=Application
 Categories=Utility;
 EOF
   #Make it executable
-  chmod +x "$DESKTOP_FILE"
-  echo "Desktop file created: $DESKTOP_FILE"
+    chmod +x "$DESKTOP_FILE"
+    echo "Desktop file created: $DESKTOP_FILE"
+  fi
   
   
   #Installing GNOME extensions:
