@@ -656,10 +656,10 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   fi
 
 
-  #Enabling the Windows 10 task view:
+  #Enabling the Windows 10 Task View:
   #Setting keyboard shortcuts to be like Windows 10:
   gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
-  DESKTOP_FILE="$HOME/.local/share/applications/activities-toggle.desktop"
+  DESKTOP_FILE="$HOME/.local/share/applications/Task-View.desktop"
   #Check if it already exists
   if [ -f "$DESKTOP_FILE" ]; then
     echo "Desktop file already exists: $DESKTOP_FILE"
@@ -667,7 +667,7 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
     #Create the desktop file
   cat > "$DESKTOP_FILE" << EOF
 [Desktop Entry]
-Name=Activities Overview
+Name=Task View
 Comment=Open GNOME Activities Overview
 Exec=xdotool keydown Super keydown Tab keyup Tab keyup Super
 Icon=xfce4-workspaces
