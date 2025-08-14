@@ -628,6 +628,31 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   if [ ! -f ~/Templates/"Empty File.txt" ]; then
     touch ~/Templates/"Empty File.txt"
   fi
+
+
+  #Enabling the Windows 10 task view:
+  #Setting keyboard shortcuts to be like Windows 10:
+  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
+  DESKTOP_FILE="$HOME/.local/share/applications/activities-toggle.desktop"
+  #Check if it already exists
+  if [ -f "$DESKTOP_FILE" ]; then
+    echo "Desktop file already exists: $DESKTOP_FILE"
+    exit 0
+  fi
+  #Create the desktop file
+  cat > "$DESKTOP_FILE" << EOF
+[Desktop Entry]
+Name=Activities Overview
+Comment=Open GNOME Activities Overview
+Exec=xdotool keydown Super keydown Tab keyup Tab keyup Super
+Icon=xfce4-workspaces
+Terminal=false
+Type=Application
+Categories=Utility;
+EOF
+  #Make it executable
+  chmod +x "$DESKTOP_FILE"
+  echo "Desktop file created: $DESKTOP_FILE"
   
   
   #Installing GNOME extensions:
@@ -710,6 +735,8 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   echo "🚀 Enabling Dash to Panel..."
   gnome-extensions enable "dash-to-panel@jderose9.github.com" || echo "⚠️ May need GNOME shell restart for effect."
   echo "🚀 Enabling Arc Menu..."
+  gnome-extensions disable "arcmenu@arcmenu.com" || echo "⚠️ May need GNOME shell restart for effect."
+  sleep 3
   gnome-extensions enable "arcmenu@arcmenu.com" || echo "⚠️ May need GNOME shell restart for effect."
   echo "🚀 Enabling Date Menu Formatter..."
   gnome-extensions enable "date-menu-formatter@marcinjakubowski.github.com"  || echo "⚠️ May need GNOME shell restart for effect."
@@ -732,31 +759,6 @@ if [[ "$DE" == *gnome* || "$DE" == *ubuntu* ]]; then
   done < setupStuff/date-menu-formatter-windows-10.txt
   #Change positions of new icons like Windows 10:
   gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
-
-  
-#Enabling the Windows 10 task view:
-  #Setting keyboard shortcuts to be like Windows 10:
-  gsettings set org.gnome.shell.keybindings toggle-overview "['<Super>Tab']"
-  DESKTOP_FILE="$HOME/.local/share/applications/activities-toggle.desktop"
-  #Check if it already exists
-  if [ -f "$DESKTOP_FILE" ]; then
-    echo "Desktop file already exists: $DESKTOP_FILE"
-    exit 0
-  fi
-  #Create the desktop file
-  cat > "$DESKTOP_FILE" << EOF
-[Desktop Entry]
-Name=Activities Overview
-Comment=Open GNOME Activities Overview
-Exec=xdotool keydown Super keydown Tab keyup Tab keyup Super
-Icon=xfce4-workspaces
-Terminal=false
-Type=Application
-Categories=Utility;
-EOF
-  #Make it executable
-  chmod +x "$DESKTOP_FILE"
-  echo "Desktop file created: $DESKTOP_FILE"
   
   
   # System-wide Windows 10 GTK theme installation
